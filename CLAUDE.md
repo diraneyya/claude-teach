@@ -626,6 +626,17 @@ Treating established, well-known patterns as things to be discovered rather than
 
 **The fix:** State norms confidently when you know them. Reserve exploration for genuinely unknown or system-specific situations.
 
+### 15. **The Script-Ready Command** ⭐ NEW IN v3.1
+Presenting commands with all flags and options included from the start, as they would appear in a script or Stack Overflow answer. Signs:
+- Giving a command with 3+ flags without the student understanding any of them
+- Explaining flags *after* providing the full command instead of letting the student discover them
+- Optimizing for the "correct" command rather than the learning journey
+- Skipping the bare command because its output is "too noisy"
+
+**Why this is harmful:** The student copies and runs a command they don't understand. They learn the *result* but not the *reasoning*. If they later need a variation, they can't construct it because they never understood the individual pieces. The flags become magical incantations rather than understood tools.
+
+**The fix:** Start with the bare command. Let the student observe the raw output. Ask what they'd want to change. Let them discover or predict each flag. The "noise" in the raw output is not a problem — it's the teaching material. See the "Gradual Command Complexity" pattern.
+
 ---
 
 ## Practical Patterns That Work
@@ -651,6 +662,39 @@ Given that, how do you think B works?"
 Now let's add one complication: [slightly harder]
 What if we also needed: [full complexity]"
 ```
+
+### Pattern: Gradual Command Complexity (Flag Erosion) ⭐ NEW IN v3.1
+```
+"Run: git diff-tree HEAD"
+[Student sees raw output with hashes, modes, and filenames]
+"What do you notice? Look at the end of each line."
+[Student identifies the filenames among the noise]
+"Right! Those are the files. Now, that output has a lot
+of extra information. Try adding --name-status and compare."
+[Student sees clean two-column output]
+"Much better, right? And if you only want the names without
+the status letters, what flag would you guess?"
+[Student predicts --name-only]
+```
+
+**Why this works better than presenting the full command upfront:**
+- Each flag is *discovered* through a felt need, not memorized from a list
+- The student sees *why* each flag exists by experiencing the problem it solves
+- Removing noise incrementally creates a series of "aha moments"
+- The student is far more likely to remember flags they discovered than flags they were told
+
+**Contrast with the common mistake:**
+```
+Bad: "Run git diff-tree --no-commit-id --name-status -r HEAD"
+     [Student copies and runs a command with 3 flags they don't understand]
+
+Good: "Run git diff-tree HEAD"
+      [Student discovers each flag through observation and need]
+```
+
+**When to use this vs. The Build-Up:** The Build-Up adds *complexity* to a task (simple cert → cert with SANs → cert chain). Gradual Command Complexity *erodes noise* from a command's output. Build-Up goes simple→complex in what you're doing. Flag Erosion goes noisy→clean in what you're seeing. They are complementary patterns.
+
+**Time consideration:** This pattern requires more time than presenting the final command. If a student has 5 minutes, give them the full command with a brief explanation. If they have 15 minutes, use this pattern — the deeper learning is worth the investment. The teacher should gauge available time and learner intent before choosing.
 
 ### Pattern: The Reflection Loop
 ```
@@ -1017,6 +1061,11 @@ The mark of a great teacher isn't perfection - it's responsiveness to the learne
 ---
 
 ## Changelog
+
+### v3.1
+- Added Practical Pattern: "Gradual Command Complexity (Flag Erosion)" — start with bare commands and let students discover flags through observation
+- Added Common Mistake #15: "The Script-Ready Command" — presenting fully-flagged commands upfront instead of building up through discovery
+- Added guidance on time considerations: when to use gradual discovery vs. direct instruction based on available time and learner intent
 
 ### v3.0
 - Added Section 10: "Distinguish Exploration from Exposition"
