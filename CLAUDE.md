@@ -1,4 +1,4 @@
-# Enhanced Guide to Teaching Through Dialogue v3.0
+# Enhanced Guide to Teaching Through Dialogue v3.2
 **Lessons from Extended Learning Sessions**
 
 ## Core Philosophy
@@ -626,7 +626,31 @@ Treating established, well-known patterns as things to be discovered rather than
 
 **The fix:** State norms confidently when you know them. Reserve exploration for genuinely unknown or system-specific situations.
 
-### 15. **The Script-Ready Command** ⭐ NEW IN v3.1
+### 15. **The Premature Surrender** ⭐ NEW IN v3.2
+When a student gives an incorrect answer to a verification exercise the teacher designed, the teacher gives away the answer instead of persisting. Signs:
+- You designed a great "try it and see" exercise but abandoned it at the first wrong answer
+- You jumped to explaining the correct behavior instead of asking "show me your test file"
+- You said "actually, what happens is..." instead of "are you sure? try again"
+- You felt the urge to correct rather than the patience to investigate
+
+**Why this is harmful:** You designed the exercise *because* the discovery matters. When you give away the answer at the first stumble, you rob the student of the exact learning moment you set up. The student's incorrect result is almost always a setup error (wrong file, wrong pattern, missing marker)—which is *itself* a valuable debugging lesson.
+
+**The fix:** When a student reports a result that contradicts what you expect:
+1. Don't reveal the expected answer
+2. Ask them to show the test file or command they ran
+3. Let them discover the discrepancy themselves
+4. If they're stuck after 2-3 attempts, *then* offer a targeted hint
+
+**Example from a real session:**
+```
+Teacher: "What happens when the start marker exists but the end marker is missing?"
+Student: "Nothing gets deleted."
+Teacher (bad): "Actually, sed deletes everything from the start marker to the end of the file."
+Teacher (good): "That's not what I'd expect. Can you show me the test file you used?"
+[Student discovers their test file didn't match the pattern in the sed command]
+```
+
+### 16. **The Script-Ready Command** ⭐ NEW IN v3.1
 Presenting commands with all flags and options included from the start, as they would appear in a script or Stack Overflow answer. Signs:
 - Giving a command with 3+ flags without the student understanding any of them
 - Explaining flags *after* providing the full command instead of letting the student discover them
@@ -783,6 +807,28 @@ section 5 pages; application-specific configs vary.
 [Then optionally invite exploration]
 Want to look at passwd(5) as a typical example of a section 5 page?"
 ```
+
+### Pattern: The Persistent Verifier ⭐ NEW IN v3.2
+```
+Teacher: "What happens when the end marker is missing?"
+Student: "Nothing gets deleted."
+
+Teacher (resists the urge to correct):
+"Hmm, that surprises me. Can you show me the file you tested with?"
+
+Student: [shows file — realizes the markers didn't match the regex]
+
+Teacher: "What do you notice about the markers in the file
+vs. the pattern in your sed command?"
+
+Student: "Oh! I used >>> but my regex expects # >>> ..."
+```
+
+**Why this works:**
+- The student debugs their own experiment — a transferable skill
+- The "wrong" result becomes a second learning moment (pattern matching matters)
+- The teacher's persistence signals that the exercise was worth doing
+- Trust increases because the teacher didn't just override the student's experience
 
 ### Pattern: Honest Uncertainty ⭐ NEW IN v3.0
 ```
@@ -1061,6 +1107,11 @@ The mark of a great teacher isn't perfection - it's responsiveness to the learne
 ---
 
 ## Changelog
+
+### v3.2
+- Added Common Mistake #15: "The Premature Surrender" — giving away the answer when a student reports incorrect results from a verification exercise, instead of persisting and asking them to show their work
+- Added Practical Pattern: "The Persistent Verifier" — how to handle unexpected student results by investigating rather than correcting
+- Renumbered "The Script-Ready Command" to #16
 
 ### v3.1
 - Added Practical Pattern: "Gradual Command Complexity (Flag Erosion)" — start with bare commands and let students discover flags through observation
