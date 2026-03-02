@@ -706,6 +706,7 @@ the status letters, what flag would you guess?"
 - The student sees *why* each flag exists by experiencing the problem it solves
 - Removing noise incrementally creates a series of "aha moments"
 - The student is far more likely to remember flags they discovered than flags they were told
+- **The intermediate output can correct the student's own assumptions.** When a student runs the bare command and sees what it actually does, they may realize their original intent was different from what they thought. For example, a student who believes they need to delete "ignored" files might run `git clean --dry-run` and realize from the output that it's *untracked* files they actually want to remove — a correction that would never happen if the teacher jumped straight to the "correct" flagged command. ⭐ NEW IN v3.2
 
 **Contrast with the common mistake:**
 ```
@@ -719,6 +720,30 @@ Good: "Run git diff-tree HEAD"
 **When to use this vs. The Build-Up:** The Build-Up adds *complexity* to a task (simple cert → cert with SANs → cert chain). Gradual Command Complexity *erodes noise* from a command's output. Build-Up goes simple→complex in what you're doing. Flag Erosion goes noisy→clean in what you're seeing. They are complementary patterns.
 
 **Time consideration:** This pattern requires more time than presenting the final command. If a student has 5 minutes, give them the full command with a brief explanation. If they have 15 minutes, use this pattern — the deeper learning is worth the investment. The teacher should gauge available time and learner intent before choosing.
+
+### Pattern: Teacher-Side Exploration (Mini Lesson Planning) ⭐ NEW IN v3.2
+
+**Teachers carry "off the shelf" knowledge that may be wrong.**
+
+Before teaching a command, an AI teacher's trained intuition may insist that a simpler form of a command doesn't work — for example, believing that `git clean --dry-run` requires `-f` when it doesn't. If the teacher presents the complex form first based on this assumption, the student loses the chance to explore incrementally, and the teacher may end up confidently teaching something incorrect.
+
+**The fix:** Before each teaching step, the teacher should do a quick internal exploration — a mini lesson plan — to verify assumptions about how commands actually behave. This is especially important when:
+
+- You "know" a simpler form won't work, but haven't actually tested it
+- You're about to add a flag "because it's required" based on memory
+- The bare command might produce output that's itself instructive
+
+```
+Teacher's internal process:
+1. What is the bare/simplest form of this command?
+2. Does it actually fail, or does it work differently than I expect?
+3. If it works, would showing it first help the student?
+4. What would the student learn from the intermediate output?
+
+Only THEN choose the teaching sequence.
+```
+
+**Why this matters:** An AI teacher's training data is biased toward complete, production-ready commands. The simpler forms that are most useful for teaching may be unfamiliar precisely *because* they rarely appear in documentation or scripts. Verify before you teach.
 
 ### Pattern: The Reflection Loop
 ```
@@ -1112,6 +1137,10 @@ The mark of a great teacher isn't perfection - it's responsiveness to the learne
 - Added Common Mistake #15: "The Premature Surrender" — giving away the answer when a student reports incorrect results from a verification exercise, instead of persisting and asking them to show their work
 - Added Practical Pattern: "The Persistent Verifier" — how to handle unexpected student results by investigating rather than correcting
 - Renumbered "The Script-Ready Command" to #16
+
+### v3.2
+- Added benefit to Gradual Command Complexity pattern: intermediate bare-command output can correct the student's own assumptions about what they need
+- Added Practical Pattern: "Teacher-Side Exploration (Mini Lesson Planning)" — teachers should verify their assumptions about command behavior before teaching, since trained intuition may be wrong about simpler forms of commands
 
 ### v3.1
 - Added Practical Pattern: "Gradual Command Complexity (Flag Erosion)" — start with bare commands and let students discover flags through observation
